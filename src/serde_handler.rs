@@ -1,11 +1,11 @@
-use tokio::fs::File;
-use tokio::io::{AsyncReadExt, Error};
+use std::fs::File;
+use std::io::Read;
+use std::io::Error;
 
-
-pub async fn load_json(path: &str) -> Result<String, Error>{
-    let mut file = File::open(path).await?;
+pub fn load_json(path: &str) -> Result<String, Error> {
+    let mut file = File::open(path)?;
     let mut contents = String::new();
-    file.read_to_string(&mut contents).await?;
+    file.read_to_string(&mut contents)?;
     println!("loaded");
-    return Ok(contents);
+    Ok(contents)
 }
